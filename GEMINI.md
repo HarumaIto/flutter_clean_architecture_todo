@@ -32,7 +32,7 @@ lib/
 │   ├── entity/         # Domain Entities (Task, Category, Tag)
 │   ├── repository/     # Abstract Repository Interfaces (ITaskRepository)
 │   ├── usecase/        # Abstract UseCase Interfaces
-│   └── value/          # Value Objects (TaskId, Priority, DueDate)
+│   └── value/          # Value Objects (TaskId, Priority, DueDate) and Enums
 │
 ├── infrastructure/      # Infrastructure Layer
 │   ├── database/       # Local DB definitions (Drift tables / DAOs)

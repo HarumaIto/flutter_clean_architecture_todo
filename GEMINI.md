@@ -95,6 +95,7 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
   - **Freezed Class Definition**: When creating a class with `freezed`, it should be defined as an `abstract class` with a `with _$...` mixin. This is required for the code generation to work correctly.
   - **Riverpod Provider Naming**: When you create a Notifier class like `TaskListNotifier` using the `@riverpod` annotation, a provider will be automatically generated with a camelCase name, such as `taskListProvider`.
+  - **Riverpod Provider Argument**: When creating a simple functional provider (i.e., not a Notifier class), the function must accept `Ref ref` as its argument.
 
 ## Tech Stack Summary
 

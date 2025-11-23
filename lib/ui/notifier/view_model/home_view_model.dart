@@ -33,8 +33,8 @@ class HomeViewModel extends _$HomeViewModel {
   }
 
   void _watchTasks() {
-    final taskListStream = ref.watch(watchTasksUseCaseProvider);
-    taskListStream.execute().map((tasks) {
+    final watchTasksUseCase = ref.watch(watchTasksUseCaseProvider);
+    watchTasksUseCase.execute().listen((tasks) {
       final taskUiModels = tasks
           .map(
             (task) => TaskUiModel(

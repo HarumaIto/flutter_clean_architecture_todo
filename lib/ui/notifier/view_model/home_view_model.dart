@@ -1,96 +1,79 @@
-import 'package:clean_architecture_todo/domain/entity/task.dart';
+import 'package:clean_architecture_todo/application/provider/task_list_stream_provider.dart';
+import 'package:clean_architecture_todo/application/provider/task_usecase_providers.dart';
+import 'package:clean_architecture_todo/domain/usecase/add_task_usecase.dart';
+import 'package:clean_architecture_todo/domain/usecase/remove_task_usecase.dart';
+import 'package:clean_architecture_todo/domain/usecase/toggle_task_completion_usecase.dart';
 import 'package:clean_architecture_todo/domain/value/priority.dart';
 import 'package:clean_architecture_todo/ui/state/home_state.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'home_view_model.g.dart';
 
 @riverpod
 class HomeViewModel extends _$HomeViewModel {
-  // in-memory state
-  final _tasks = <Task>[];
+  late final IAddTaskUseCase _addTaskUseCase;
+  late final IRemoveTaskUseCase _removeTaskUseCase;
+  late final IToggleTaskCompletionUseCase _toggleTaskCompletionUseCase;
+  late final DateFormat _dateFormat;
 
   @override
   HomeState build() {
-    // 初期データ
-    _tasks.addAll([
-      Task(
-        id: const Uuid().v4(),
-        title: '最初のタスク',
-        description: 'これは最初のタスクです。',
-        isCompleted: false,
-        createdAt: DateTime.now(),
-        dueDate: DateTime.now().add(const Duration(days: 1)),
-        priority: Priority.medium,
-      ),
-      Task(
-        id: const Uuid().v4(),
-        title: '2番目のタスク',
-        description: 'これは2番目のタスクです。',
-        isCompleted: true,
-        createdAt: DateTime.now(),
-        dueDate: DateTime.now().add(const Duration(days: 2)),
-        priority: Priority.high,
-      ),
-    ]);
-    return _toHomeState();
+    _loadUseCases();
+    _watchTasks();
+    return const HomeState();
   }
 
-  void addTask({
+  void _loadUseCases() {
+    _addTaskUseCase = ref.read(addTaskUseCaseProvider);
+    _removeTaskUseCase = ref.read(removeTaskUseCaseProvider);
+    _toggleTaskCompletionUseCase =
+        ref.read(toggleTaskCompletionUseCaseProvider);
+    _dateFormat = DateFormat('yyyy-MM-dd');
+  }
+
+  void _watchTasks() {
+    final taskListStream = ref.watch(taskListStreamProvider);
+    taskListStream.when(
+      data: (tasks) {
+        final taskUiModels = tasks
+            .map(
+              (task) => TaskUiModel(
+                id: task.id,
+                title: task.title,
+                description: task.description,
+                isCompleted: task.isCompleted,
+                dueDate: _dateFormat.format(task.dueDate),
+                priority: task.priority.name,
+              ),
+            )
+            .toList();
+        state = state.copyWith(tasks: taskUiModels);
+      },
+      error: (error, stack) {},
+      loading: () {},
+    );
+  }
+
+  Future<void> addTask({
     required String title,
     required String description,
     required DateTime dueDate,
     required Priority priority,
-  }) {
-    final newTask = Task(
-      id: const Uuid().v4(),
+  }) async {
+    await _addTaskUseCase.execute(
       title: title,
       description: description,
-      isCompleted: false,
-      createdAt: DateTime.now(),
       dueDate: dueDate,
       priority: priority,
     );
-    _tasks.add(newTask);
-    state = _toHomeState();
   }
 
-  void updateTask(Task updatedTask) {
-    final index = _tasks.indexWhere((task) => task.id == updatedTask.id);
-    if (index != -1) {
-      _tasks[index] = updatedTask;
-    }
-    state = _toHomeState();
+  Future<void> removeTask(String taskId) async {
+    await _removeTaskUseCase.execute(taskId);
   }
 
-  void removeTask(String taskId) {
-    _tasks.removeWhere((task) => task.id == taskId);
-    state = _toHomeState();
-  }
-
-  void toggleCompletion(String taskId) {
-    final index = _tasks.indexWhere((task) => task.id == taskId);
-    if (index != -1) {
-      final task = _tasks[index];
-      _tasks[index] = task.copyWith(isCompleted: !task.isCompleted);
-    }
-    state = _toHomeState();
-  }
-
-  HomeState _toHomeState() {
-    final taskUiModels = _tasks.map((task) {
-      return TaskUiModel(
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        isCompleted: task.isCompleted,
-        dueDate: DateFormat('yyyy/MM/dd').format(task.dueDate),
-        priority: task.priority.name,
-      );
-    }).toList();
-
-    return HomeState(tasks: taskUiModels);
+  Future<void> toggleCompletion(String taskId) async {
+    await _toggleTaskCompletionUseCase.execute(taskId);
   }
 }

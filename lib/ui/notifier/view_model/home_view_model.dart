@@ -1,4 +1,3 @@
-import 'package:clean_architecture_todo/application/provider/task_list_stream_provider.dart';
 import 'package:clean_architecture_todo/application/provider/task_usecase_providers.dart';
 import 'package:clean_architecture_todo/domain/usecase/add_task_usecase.dart';
 import 'package:clean_architecture_todo/domain/usecase/remove_task_usecase.dart';
@@ -27,32 +26,29 @@ class HomeViewModel extends _$HomeViewModel {
   void _loadUseCases() {
     _addTaskUseCase = ref.read(addTaskUseCaseProvider);
     _removeTaskUseCase = ref.read(removeTaskUseCaseProvider);
-    _toggleTaskCompletionUseCase =
-        ref.read(toggleTaskCompletionUseCaseProvider);
+    _toggleTaskCompletionUseCase = ref.read(
+      toggleTaskCompletionUseCaseProvider,
+    );
     _dateFormat = DateFormat('yyyy-MM-dd');
   }
 
   void _watchTasks() {
-    final taskListStream = ref.watch(taskListStreamProvider);
-    taskListStream.when(
-      data: (tasks) {
-        final taskUiModels = tasks
-            .map(
-              (task) => TaskUiModel(
-                id: task.id,
-                title: task.title,
-                description: task.description,
-                isCompleted: task.isCompleted,
-                dueDate: _dateFormat.format(task.dueDate),
-                priority: task.priority.name,
-              ),
-            )
-            .toList();
-        state = state.copyWith(tasks: taskUiModels);
-      },
-      error: (error, stack) {},
-      loading: () {},
-    );
+    final taskListStream = ref.watch(watchTasksUseCaseProvider);
+    taskListStream.execute().map((tasks) {
+      final taskUiModels = tasks
+          .map(
+            (task) => TaskUiModel(
+              id: task.id,
+              title: task.title,
+              description: task.description,
+              isCompleted: task.isCompleted,
+              dueDate: _dateFormat.format(task.dueDate),
+              priority: task.priority.name,
+            ),
+          )
+          .toList();
+      state = state.copyWith(tasks: taskUiModels);
+    });
   }
 
   Future<void> addTask({

@@ -1,22 +1,21 @@
-import 'package:clean_architecture_todo/domain/entity/task.dart';
 import 'package:clean_architecture_todo/ui/component/add_task_sheet.dart';
-import 'package:clean_architecture_todo/ui/notifier/task_list_notifier.dart';
+import 'package:clean_architecture_todo/ui/state/home_state.dart';
+import 'package:clean_architecture_todo/ui/notifier/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final taskList = ref.watch(taskListProvider);
+    final homeState = ref.watch(homeViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('TODO App'),
       ),
-      body: taskList.isEmpty
+      body: homeState.tasks.isEmpty
           ? const Center(
               child: Text(
                 'タスクがありません',
@@ -24,9 +23,9 @@ class HomePage extends ConsumerWidget {
               ),
             )
           : ListView.builder(
-              itemCount: taskList.length,
+              itemCount: homeState.tasks.length,
               itemBuilder: (context, index) {
-                final task = taskList[index];
+                final task = homeState.tasks[index];
                 return CheckboxListTile(
                   title: Text(
                     task.title,
@@ -37,17 +36,18 @@ class HomePage extends ConsumerWidget {
                     ),
                   ),
                   subtitle: Text(
-                    '期限: ${DateFormat('yyyy/MM/dd').format(task.dueDate)}',
+                    '期限: ${task.dueDate}',
                   ),
                   value: task.isCompleted,
                   onChanged: (value) {
                     ref
-                        .read(taskListProvider.notifier)
+                        .read(homeViewModelProvider.notifier)
                         .toggleCompletion(task.id);
                   },
                   secondary: IconButton(
                     icon: const Icon(Icons.delete),
-                    onPressed: () => _showDeleteConfirmDialog(context, ref, task),
+                    onPressed: () =>
+                        _showDeleteConfirmDialog(context, ref, task),
                   ),
                 );
               },
@@ -66,7 +66,7 @@ class HomePage extends ConsumerWidget {
   }
 
   void _showDeleteConfirmDialog(
-      BuildContext context, WidgetRef ref, Task task) {
+      BuildContext context, WidgetRef ref, TaskUiModel task) {
     showDialog(
       context: context,
       builder: (context) {
@@ -80,7 +80,7 @@ class HomePage extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () {
-                ref.read(taskListProvider.notifier).removeTask(task.id);
+                ref.read(homeViewModelProvider.notifier).removeTask(task.id);
                 Navigator.of(context).pop();
               },
               child: const Text('削除'),

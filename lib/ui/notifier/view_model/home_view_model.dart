@@ -1,16 +1,21 @@
 import 'package:clean_architecture_todo/domain/entity/task.dart';
 import 'package:clean_architecture_todo/domain/value/priority.dart';
+import 'package:clean_architecture_todo/ui/state/home_state.dart';
+import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-part 'task_list_notifier.g.dart';
+part 'home_view_model.g.dart';
 
 @riverpod
-class TaskListNotifier extends _$TaskListNotifier {
+class HomeViewModel extends _$HomeViewModel {
+  // in-memory state
+  final _tasks = <Task>[];
+
   @override
-  List<Task> build() {
+  HomeState build() {
     // 初期データ
-    return [
+    _tasks.addAll([
       Task(
         id: const Uuid().v4(),
         title: '最初のタスク',
@@ -29,7 +34,8 @@ class TaskListNotifier extends _$TaskListNotifier {
         dueDate: DateTime.now().add(const Duration(days: 2)),
         priority: Priority.high,
       ),
-    ];
+    ]);
+    return _toHomeState();
   }
 
   void addTask({
@@ -47,27 +53,44 @@ class TaskListNotifier extends _$TaskListNotifier {
       dueDate: dueDate,
       priority: priority,
     );
-    state = [...state, newTask];
+    _tasks.add(newTask);
+    state = _toHomeState();
   }
 
   void updateTask(Task updatedTask) {
-    state = [
-      for (final task in state)
-        if (task.id == updatedTask.id) updatedTask else task,
-    ];
+    final index = _tasks.indexWhere((task) => task.id == updatedTask.id);
+    if (index != -1) {
+      _tasks[index] = updatedTask;
+    }
+    state = _toHomeState();
   }
 
   void removeTask(String taskId) {
-    state = state.where((task) => task.id != taskId).toList();
+    _tasks.removeWhere((task) => task.id == taskId);
+    state = _toHomeState();
   }
 
   void toggleCompletion(String taskId) {
-    state = [
-      for (final task in state)
-        if (task.id == taskId)
-          task.copyWith(isCompleted: !task.isCompleted)
-        else
-          task,
-    ];
+    final index = _tasks.indexWhere((task) => task.id == taskId);
+    if (index != -1) {
+      final task = _tasks[index];
+      _tasks[index] = task.copyWith(isCompleted: !task.isCompleted);
+    }
+    state = _toHomeState();
+  }
+
+  HomeState _toHomeState() {
+    final taskUiModels = _tasks.map((task) {
+      return TaskUiModel(
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        isCompleted: task.isCompleted,
+        dueDate: DateFormat('yyyy/MM/dd').format(task.dueDate),
+        priority: task.priority.name,
+      );
+    }).toList();
+
+    return HomeState(tasks: taskUiModels);
   }
 }

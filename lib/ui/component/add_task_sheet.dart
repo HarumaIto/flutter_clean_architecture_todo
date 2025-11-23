@@ -1,9 +1,8 @@
 import 'package:clean_architecture_todo/domain/value/priority.dart';
-import 'package:clean_architecture_todo/ui/notifier/task_list_notifier.dart';
+import 'package:clean_architecture_todo/ui/notifier/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-
 
 class AddTaskSheet extends ConsumerStatefulWidget {
   const AddTaskSheet({super.key});
@@ -36,7 +35,7 @@ class _AddTaskSheetState extends ConsumerState<AddTaskSheet> {
   void _submit() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      ref.read(taskListProvider.notifier).addTask(
+      ref.read(homeViewModelProvider.notifier).addTask(
             title: _title,
             description: _description,
             dueDate: _dueDate,

@@ -1,16 +1,9 @@
 # clean_architecture_todo
 
-A new Flutter project.
+Flutterにおけるクリーンアーキテクチャを勉強するためのプロジェクトです。
 
-## Getting Started
+## 1. ミニマムにRAMで実装
 
-This project is a starting point for a Flutter application.
+## 2. ローカルDBを利用してデータを永続化
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 3. Firebaseを使用して認証とクラウドDBを実装

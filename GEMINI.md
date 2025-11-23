@@ -91,6 +91,11 @@ flutter pub run build_runner build --delete-conflicting-outputs
   - **UseCases**: `CreateTaskUseCase`, `GetOverdueTasksUseCase`
   - **Providers**: `taskListProvider`, `taskRepositoryProvider`
 
+### Freezed & Riverpod Best Practices
+
+  - **Freezed Class Definition**: When creating a class with `freezed`, it should be defined as an `abstract class` with a `with _$...` mixin. This is required for the code generation to work correctly.
+  - **Riverpod Provider Naming**: When you create a Notifier class like `TaskListNotifier` using the `@riverpod` annotation, a provider will be automatically generated with a camelCase name, such as `taskListProvider`.
+
 ## Tech Stack Summary
 
   - **Flutter**: Latest Stable

@@ -8,5 +8,5 @@ part 'task_repository_provider.g.dart';
 @riverpod
 ITaskRepository taskRepository(Ref ref) {
   final taskDao = ref.watch(taskDaoProvider);
-  return TaskRepositoryImpl(taskDao);
+  return TaskRepositoryImpl(taskDao: taskDao);
 }

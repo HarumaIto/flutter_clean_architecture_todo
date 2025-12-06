@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_view_model.dart';
+part of 'task_list_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,52 +9,52 @@ part of 'home_view_model.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(HomeViewModel)
-const homeViewModelProvider = HomeViewModelProvider._();
+@ProviderFor(TaskListViewModel)
+const taskListViewModelProvider = TaskListViewModelProvider._();
 
-final class HomeViewModelProvider
-    extends $NotifierProvider<HomeViewModel, HomeState> {
-  const HomeViewModelProvider._()
+final class TaskListViewModelProvider
+    extends $NotifierProvider<TaskListViewModel, TaskListState> {
+  const TaskListViewModelProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'homeViewModelProvider',
+        name: r'taskListViewModelProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$homeViewModelHash();
+  String debugGetCreateSourceHash() => _$taskListViewModelHash();
 
   @$internal
   @override
-  HomeViewModel create() => HomeViewModel();
+  TaskListViewModel create() => TaskListViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(HomeState value) {
+  Override overrideWithValue(TaskListState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<HomeState>(value),
+      providerOverride: $SyncValueProvider<TaskListState>(value),
     );
   }
 }
 
-String _$homeViewModelHash() => r'9715d36e3228291acbd0fbd1aaa872fbb7b39443';
+String _$taskListViewModelHash() => r'642a4315ea59f8e8bb9b281c38e07109d8b8b5c0';
 
-abstract class _$HomeViewModel extends $Notifier<HomeState> {
-  HomeState build();
+abstract class _$TaskListViewModel extends $Notifier<TaskListState> {
+  TaskListState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<HomeState, HomeState>;
+    final ref = this.ref as $Ref<TaskListState, TaskListState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<HomeState, HomeState>,
-              HomeState,
+              AnyNotifier<TaskListState, TaskListState>,
+              TaskListState,
               Object?,
               Object?
             >;

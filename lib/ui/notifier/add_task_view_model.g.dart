@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_view_model.dart';
+part of 'add_task_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,52 +9,52 @@ part of 'home_view_model.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(HomeViewModel)
-const homeViewModelProvider = HomeViewModelProvider._();
+@ProviderFor(AddTaskViewModel)
+const addTaskViewModelProvider = AddTaskViewModelProvider._();
 
-final class HomeViewModelProvider
-    extends $NotifierProvider<HomeViewModel, HomeState> {
-  const HomeViewModelProvider._()
+final class AddTaskViewModelProvider
+    extends $NotifierProvider<AddTaskViewModel, AddTaskState> {
+  const AddTaskViewModelProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'homeViewModelProvider',
+        name: r'addTaskViewModelProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$homeViewModelHash();
+  String debugGetCreateSourceHash() => _$addTaskViewModelHash();
 
   @$internal
   @override
-  HomeViewModel create() => HomeViewModel();
+  AddTaskViewModel create() => AddTaskViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(HomeState value) {
+  Override overrideWithValue(AddTaskState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<HomeState>(value),
+      providerOverride: $SyncValueProvider<AddTaskState>(value),
     );
   }
 }
 
-String _$homeViewModelHash() => r'9715d36e3228291acbd0fbd1aaa872fbb7b39443';
+String _$addTaskViewModelHash() => r'371215912113ec2ae35e96f5caee13cd7b8a756d';
 
-abstract class _$HomeViewModel extends $Notifier<HomeState> {
-  HomeState build();
+abstract class _$AddTaskViewModel extends $Notifier<AddTaskState> {
+  AddTaskState build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<HomeState, HomeState>;
+    final ref = this.ref as $Ref<AddTaskState, AddTaskState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<HomeState, HomeState>,
-              HomeState,
+              AnyNotifier<AddTaskState, AddTaskState>,
+              AddTaskState,
               Object?,
               Object?
             >;

@@ -735,7 +735,3 @@ class $AppDatabaseManager {
   $$TasksTableTableManager get tasks =>
       $$TasksTableTableManager(_db, _db.tasks);
 }
-
-mixin _$TaskDaoMixin on DatabaseAccessor<AppDatabase> {
-  $TasksTable get tasks => attachedDatabase.tasks;
-}

@@ -27,11 +27,11 @@ graph TD
     end
 
     subgraph "Domain Layer"
-        C[Entities / Repositories(Interface)]
+        C["Entities / Repositories(Interface)"]
     end
 
     subgraph "Infrastructure Layer"
-        D[Repositories(Implementation)]
+        D["Repositories(Implementation)"]
         E[Drift Database]
     end
 

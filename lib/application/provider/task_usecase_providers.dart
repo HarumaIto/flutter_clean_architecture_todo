@@ -9,6 +9,7 @@ import 'package:clean_architecture_todo/domain/usecase/toggle_task_completion_us
 import 'package:clean_architecture_todo/domain/usecase/update_task_usecase.dart';
 import 'package:clean_architecture_todo/domain/usecase/watch_tasks_usecase.dart';
 import 'package:clean_architecture_todo/infrastructure/provider/task_repository_provider.dart';
+import 'package:clean_architecture_todo/infrastructure/provider/vibration_service_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'task_usecase_providers.g.dart';
@@ -38,8 +39,8 @@ IRemoveTaskUseCase removeTaskUseCase(Ref ref) {
 }
 
 @riverpod
-IToggleTaskCompletionUseCase toggleTaskCompletionUseCase(
-    Ref ref) {
+IToggleTaskCompletionUseCase toggleTaskCompletionUseCase(Ref ref) {
   final repository = ref.watch(taskRepositoryProvider);
-  return ToggleTaskCompletionUseCase(repository);
+  final vibrationService = ref.watch(vibrationServiceProvider);
+  return ToggleTaskCompletionUseCase(repository, vibrationService);
 }

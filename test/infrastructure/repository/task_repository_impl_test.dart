@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:clean_architecture_todo/domain/entity/task.dart' as domain_task;
 import 'package:clean_architecture_todo/domain/value/priority.dart';
-import 'package:clean_architecture_todo/infrastructure/database/app_database.dart'
+import 'package:clean_architecture_todo/infrastructure/datasource/app_database.dart'
     as drift;
-import 'package:clean_architecture_todo/infrastructure/database/task_dao.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/task_dao.dart';
 import 'package:clean_architecture_todo/infrastructure/repository/task_repository_impl.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,5 +1,5 @@
-import 'package:clean_architecture_todo/infrastructure/database/app_database.dart';
-import 'package:clean_architecture_todo/infrastructure/database/task_dao.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/app_database.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/task_dao.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'database_provider.g.dart';

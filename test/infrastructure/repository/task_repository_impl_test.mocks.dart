@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:clean_architecture_todo/infrastructure/database/app_database.dart'
+import 'package:clean_architecture_todo/infrastructure/datasource/app_database.dart'
     as _i2;
-import 'package:clean_architecture_todo/infrastructure/database/task_dao.dart'
+import 'package:clean_architecture_todo/infrastructure/datasource/task_dao.dart'
     as _i6;
 import 'package:drift/drift.dart' as _i3;
 import 'package:drift/src/runtime/executor/stream_queries.dart' as _i4;

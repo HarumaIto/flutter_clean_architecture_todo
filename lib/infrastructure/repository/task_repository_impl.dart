@@ -1,7 +1,8 @@
 import 'package:clean_architecture_todo/domain/entity/task.dart' as domain_task;
 import 'package:clean_architecture_todo/domain/repository/task_repository.dart';
-import 'package:clean_architecture_todo/infrastructure/database/app_database.dart' as drift;
-import 'package:clean_architecture_todo/infrastructure/database/task_dao.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/app_database.dart'
+    as drift;
+import 'package:clean_architecture_todo/infrastructure/datasource/task_dao.dart';
 import 'package:drift/drift.dart';
 
 class TaskRepositoryImpl implements ITaskRepository {
@@ -11,12 +12,9 @@ class TaskRepositoryImpl implements ITaskRepository {
   @override
   Stream<List<domain_task.Task>> watchTasks() {
     return taskDao.watchTasks().map(
-          (driftTasks) => driftTasks
-              .map(
-                (driftTask) => _toDomainTask(driftTask),
-              )
-              .toList(),
-        );
+      (driftTasks) =>
+          driftTasks.map((driftTask) => _toDomainTask(driftTask)).toList(),
+    );
   }
 
   @override

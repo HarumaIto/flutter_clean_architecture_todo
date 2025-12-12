@@ -1,4 +1,4 @@
-import 'package:clean_architecture_todo/infrastructure/database/app_database.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/app_database.dart';
 import 'package:drift/drift.dart';
 
 @DataClassName('Task')

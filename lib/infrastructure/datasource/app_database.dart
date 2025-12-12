@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:clean_architecture_todo/infrastructure/database/task_dao.dart';
+import 'package:clean_architecture_todo/infrastructure/datasource/task_dao.dart';
 import 'package:clean_architecture_todo/infrastructure/model/task_table.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';

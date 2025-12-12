@@ -239,4 +239,4 @@ final class ToggleTaskCompletionUseCaseProvider
 }
 
 String _$toggleTaskCompletionUseCaseHash() =>
-    r'a1be52adb17a94cbe40be47a4ae15e9aa0adcd54';
+    r'11b94f2d6a5276ba833a6512581d34ce0697c12d';

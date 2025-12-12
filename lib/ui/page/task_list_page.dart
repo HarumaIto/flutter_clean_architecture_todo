@@ -11,12 +11,7 @@ class TaskListPage extends ConsumerWidget {
     final state = ref.watch(taskListViewModelProvider);
 
     return state.tasks.isEmpty
-        ? const Center(
-            child: Text(
-              'タスクがありません',
-              style: TextStyle(fontSize: 18),
-            ),
-          )
+        ? const Center(child: Text('タスクがありません', style: TextStyle(fontSize: 18)))
         : ListView.builder(
             itemCount: state.tasks.length,
             itemBuilder: (context, index) {
@@ -26,4 +21,3 @@ class TaskListPage extends ConsumerWidget {
           );
   }
 }
-

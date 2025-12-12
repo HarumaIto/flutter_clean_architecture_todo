@@ -8,29 +8,35 @@ part 'add_task_view_model.g.dart';
 
 @riverpod
 class AddTaskViewModel extends _$AddTaskViewModel {
-  late final IAddTaskUseCase _addTaskUseCase;
+  late IAddTaskUseCase _addTaskUseCase;
 
   @override
   AddTaskState build() {
     _loadUseCases();
-    return const AddTaskState();
+    return AddTaskState(dueDate: DateTime.now());
   }
 
   void _loadUseCases() {
-    _addTaskUseCase = ref.read(addTaskUseCaseProvider);
+    _addTaskUseCase = ref.watch(addTaskUseCaseProvider);
+  }
+
+  void setDueDate(DateTime dueDate) {
+    state = state.copyWith(dueDate: dueDate);
+  }
+
+  void setPriority(Priority priority) {
+    state = state.copyWith(priority: priority);
   }
 
   Future<void> addTask({
     required String title,
     required String description,
-    required DateTime dueDate,
-    required Priority priority,
   }) async {
     await _addTaskUseCase.execute(
       title: title,
       description: description,
-      dueDate: dueDate,
-      priority: priority,
+      dueDate: state.dueDate,
+      priority: state.priority,
     );
   }
 }

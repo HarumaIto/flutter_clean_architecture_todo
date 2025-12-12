@@ -277,7 +277,7 @@ as List<TaskUiModel>,
 /// @nodoc
 mixin _$TaskUiModel {
 
- String get id; String get title; String get description; bool get isCompleted; String get dueDate; String get priority;
+ String get id; String get title; String get description; bool get isCompleted; String get dueDate; String get priority; bool get isOverdue;
 /// Create a copy of TaskUiModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -288,16 +288,16 @@ $TaskUiModelCopyWith<TaskUiModel> get copyWith => _$TaskUiModelCopyWithImpl<Task
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskUiModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaskUiModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.isOverdue, isOverdue) || other.isOverdue == isOverdue));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,isCompleted,dueDate,priority);
+int get hashCode => Object.hash(runtimeType,id,title,description,isCompleted,dueDate,priority,isOverdue);
 
 @override
 String toString() {
-  return 'TaskUiModel(id: $id, title: $title, description: $description, isCompleted: $isCompleted, dueDate: $dueDate, priority: $priority)';
+  return 'TaskUiModel(id: $id, title: $title, description: $description, isCompleted: $isCompleted, dueDate: $dueDate, priority: $priority, isOverdue: $isOverdue)';
 }
 
 
@@ -308,7 +308,7 @@ abstract mixin class $TaskUiModelCopyWith<$Res>  {
   factory $TaskUiModelCopyWith(TaskUiModel value, $Res Function(TaskUiModel) _then) = _$TaskUiModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String description, bool isCompleted, String dueDate, String priority
+ String id, String title, String description, bool isCompleted, String dueDate, String priority, bool isOverdue
 });
 
 
@@ -325,7 +325,7 @@ class _$TaskUiModelCopyWithImpl<$Res>
 
 /// Create a copy of TaskUiModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? isCompleted = null,Object? dueDate = null,Object? priority = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = null,Object? isCompleted = null,Object? dueDate = null,Object? priority = null,Object? isOverdue = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -333,7 +333,8 @@ as String,description: null == description ? _self.description : description // 
 as String,isCompleted: null == isCompleted ? _self.isCompleted : isCompleted // ignore: cast_nullable_to_non_nullable
 as bool,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isOverdue: null == isOverdue ? _self.isOverdue : isOverdue // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -418,10 +419,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority,  bool isOverdue)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaskUiModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority);case _:
+return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority,_that.isOverdue);case _:
   return orElse();
 
 }
@@ -439,10 +440,10 @@ return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority,  bool isOverdue)  $default,) {final _that = this;
 switch (_that) {
 case _TaskUiModel():
-return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority);case _:
+return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority,_that.isOverdue);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -459,10 +460,10 @@ return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String description,  bool isCompleted,  String dueDate,  String priority,  bool isOverdue)?  $default,) {final _that = this;
 switch (_that) {
 case _TaskUiModel() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority);case _:
+return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.dueDate,_that.priority,_that.isOverdue);case _:
   return null;
 
 }
@@ -474,7 +475,7 @@ return $default(_that.id,_that.title,_that.description,_that.isCompleted,_that.d
 
 
 class _TaskUiModel implements TaskUiModel {
-  const _TaskUiModel({required this.id, required this.title, required this.description, required this.isCompleted, required this.dueDate, required this.priority});
+  const _TaskUiModel({required this.id, required this.title, required this.description, required this.isCompleted, required this.dueDate, required this.priority, required this.isOverdue});
   
 
 @override final  String id;
@@ -483,6 +484,7 @@ class _TaskUiModel implements TaskUiModel {
 @override final  bool isCompleted;
 @override final  String dueDate;
 @override final  String priority;
+@override final  bool isOverdue;
 
 /// Create a copy of TaskUiModel
 /// with the given fields replaced by the non-null parameter values.
@@ -494,16 +496,16 @@ _$TaskUiModelCopyWith<_TaskUiModel> get copyWith => __$TaskUiModelCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskUiModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaskUiModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted)&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority)&&(identical(other.isOverdue, isOverdue) || other.isOverdue == isOverdue));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,description,isCompleted,dueDate,priority);
+int get hashCode => Object.hash(runtimeType,id,title,description,isCompleted,dueDate,priority,isOverdue);
 
 @override
 String toString() {
-  return 'TaskUiModel(id: $id, title: $title, description: $description, isCompleted: $isCompleted, dueDate: $dueDate, priority: $priority)';
+  return 'TaskUiModel(id: $id, title: $title, description: $description, isCompleted: $isCompleted, dueDate: $dueDate, priority: $priority, isOverdue: $isOverdue)';
 }
 
 
@@ -514,7 +516,7 @@ abstract mixin class _$TaskUiModelCopyWith<$Res> implements $TaskUiModelCopyWith
   factory _$TaskUiModelCopyWith(_TaskUiModel value, $Res Function(_TaskUiModel) _then) = __$TaskUiModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String description, bool isCompleted, String dueDate, String priority
+ String id, String title, String description, bool isCompleted, String dueDate, String priority, bool isOverdue
 });
 
 
@@ -531,7 +533,7 @@ class __$TaskUiModelCopyWithImpl<$Res>
 
 /// Create a copy of TaskUiModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? isCompleted = null,Object? dueDate = null,Object? priority = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = null,Object? isCompleted = null,Object? dueDate = null,Object? priority = null,Object? isOverdue = null,}) {
   return _then(_TaskUiModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -539,7 +541,8 @@ as String,description: null == description ? _self.description : description // 
 as String,isCompleted: null == isCompleted ? _self.isCompleted : isCompleted // ignore: cast_nullable_to_non_nullable
 as bool,dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
 as String,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isOverdue: null == isOverdue ? _self.isOverdue : isOverdue // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

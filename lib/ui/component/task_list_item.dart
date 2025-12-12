@@ -23,6 +23,9 @@ class TaskListItem extends ConsumerWidget {
       ),
       subtitle: Text(
         '期限: ${task.dueDate}',
+        style: TextStyle(
+          color: task.isOverdue ? Colors.red : null,
+        ),
       ),
       value: task.isCompleted,
       onChanged: (value) {

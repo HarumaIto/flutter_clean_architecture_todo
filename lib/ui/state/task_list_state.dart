@@ -18,5 +18,6 @@ abstract class TaskUiModel with _$TaskUiModel {
     required bool isCompleted,
     required String dueDate,
     required String priority,
+    required bool isOverdue,
   }) = _TaskUiModel;
 }

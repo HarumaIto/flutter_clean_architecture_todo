@@ -48,4 +48,4 @@ final class NavigatorProvider
   }
 }
 
-String _$navigatorHash() => r'cb5c8ef38b6fab800e0544c8c0c91e4a1eb076d0';
+String _$navigatorHash() => r'6ebd77001d450b9d35062a86c544133091d4906c';

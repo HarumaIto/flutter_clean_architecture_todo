@@ -14,30 +14,62 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddTaskState {
 
-
+ DateTime get dueDate; Priority get priority;
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AddTaskStateCopyWith<AddTaskState> get copyWith => _$AddTaskStateCopyWithImpl<AddTaskState>(this as AddTaskState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddTaskState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddTaskState&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,dueDate,priority);
 
 @override
 String toString() {
-  return 'AddTaskState()';
+  return 'AddTaskState(dueDate: $dueDate, priority: $priority)';
 }
 
 
 }
 
 /// @nodoc
-class $AddTaskStateCopyWith<$Res>  {
-$AddTaskStateCopyWith(AddTaskState _, $Res Function(AddTaskState) __);
+abstract mixin class $AddTaskStateCopyWith<$Res>  {
+  factory $AddTaskStateCopyWith(AddTaskState value, $Res Function(AddTaskState) _then) = _$AddTaskStateCopyWithImpl;
+@useResult
+$Res call({
+ DateTime dueDate, Priority priority
+});
+
+
+
+
+}
+/// @nodoc
+class _$AddTaskStateCopyWithImpl<$Res>
+    implements $AddTaskStateCopyWith<$Res> {
+  _$AddTaskStateCopyWithImpl(this._self, this._then);
+
+  final AddTaskState _self;
+  final $Res Function(AddTaskState) _then;
+
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? dueDate = null,Object? priority = null,}) {
+  return _then(_self.copyWith(
+dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
+as DateTime,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
+as Priority,
+  ));
+}
+
 }
 
 
@@ -119,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function()?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime dueDate,  Priority priority)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddTaskState() when $default != null:
-return $default();case _:
+return $default(_that.dueDate,_that.priority);case _:
   return orElse();
 
 }
@@ -140,10 +172,10 @@ return $default();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function()  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime dueDate,  Priority priority)  $default,) {final _that = this;
 switch (_that) {
 case _AddTaskState():
-return $default();case _:
+return $default(_that.dueDate,_that.priority);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +192,10 @@ return $default();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function()?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime dueDate,  Priority priority)?  $default,) {final _that = this;
 switch (_that) {
 case _AddTaskState() when $default != null:
-return $default();case _:
+return $default(_that.dueDate,_that.priority);case _:
   return null;
 
 }
@@ -175,32 +207,68 @@ return $default();case _:
 
 
 class _AddTaskState implements AddTaskState {
-  const _AddTaskState();
+  const _AddTaskState({required this.dueDate, this.priority = Priority.none});
   
 
+@override final  DateTime dueDate;
+@override@JsonKey() final  Priority priority;
 
-
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AddTaskStateCopyWith<_AddTaskState> get copyWith => __$AddTaskStateCopyWithImpl<_AddTaskState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddTaskState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddTaskState&&(identical(other.dueDate, dueDate) || other.dueDate == dueDate)&&(identical(other.priority, priority) || other.priority == priority));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,dueDate,priority);
 
 @override
 String toString() {
-  return 'AddTaskState()';
+  return 'AddTaskState(dueDate: $dueDate, priority: $priority)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$AddTaskStateCopyWith<$Res> implements $AddTaskStateCopyWith<$Res> {
+  factory _$AddTaskStateCopyWith(_AddTaskState value, $Res Function(_AddTaskState) _then) = __$AddTaskStateCopyWithImpl;
+@override @useResult
+$Res call({
+ DateTime dueDate, Priority priority
+});
 
 
+
+
+}
+/// @nodoc
+class __$AddTaskStateCopyWithImpl<$Res>
+    implements _$AddTaskStateCopyWith<$Res> {
+  __$AddTaskStateCopyWithImpl(this._self, this._then);
+
+  final _AddTaskState _self;
+  final $Res Function(_AddTaskState) _then;
+
+/// Create a copy of AddTaskState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? dueDate = null,Object? priority = null,}) {
+  return _then(_AddTaskState(
+dueDate: null == dueDate ? _self.dueDate : dueDate // ignore: cast_nullable_to_non_nullable
+as DateTime,priority: null == priority ? _self.priority : priority // ignore: cast_nullable_to_non_nullable
+as Priority,
+  ));
+}
+
+
+}
 
 // dart format on

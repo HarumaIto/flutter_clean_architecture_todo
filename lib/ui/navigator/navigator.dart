@@ -45,7 +45,11 @@ class Navigator {
 
   Future<void> pushToAddPage() async {
     await key.currentState!.push(
-      MaterialPageRoute(builder: (context) => const AddTaskPage()),
+      MaterialPageRoute(builder: (context) => AddTaskPage()),
     );
+  }
+
+  void pop() {
+    key.currentState!.pop();
   }
 }

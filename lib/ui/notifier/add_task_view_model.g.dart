@@ -41,7 +41,7 @@ final class AddTaskViewModelProvider
   }
 }
 
-String _$addTaskViewModelHash() => r'371215912113ec2ae35e96f5caee13cd7b8a756d';
+String _$addTaskViewModelHash() => r'479be3a7bfb94f260607ad7391aa861a59b6925f';
 
 abstract class _$AddTaskViewModel extends $Notifier<AddTaskState> {
   AddTaskState build();

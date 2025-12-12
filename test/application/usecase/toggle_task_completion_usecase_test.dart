@@ -1,19 +1,26 @@
 import 'package:clean_architecture_todo/application/usecase/toggle_task_completion_usecase.dart';
 import 'package:clean_architecture_todo/domain/entity/task.dart';
+import 'package:clean_architecture_todo/domain/service/vibration_service.dart';
 import 'package:clean_architecture_todo/domain/value/priority.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'add_task_usecase_test.mocks.dart';
+import 'toggle_task_completion_usecase_test.mocks.dart';
 
+@GenerateMocks([IVibrationService])
 void main() {
   late ToggleTaskCompletionUseCase toggleTaskCompletionUseCase;
   late MockITaskRepository mockTaskRepository;
+  late MockIVibrationService mockVibrationService;
 
   setUp(() {
     mockTaskRepository = MockITaskRepository();
+    mockVibrationService = MockIVibrationService();
     toggleTaskCompletionUseCase = ToggleTaskCompletionUseCase(
       mockTaskRepository,
+      mockVibrationService,
     );
   });
 

@@ -27,6 +27,7 @@ Map<String, dynamic> _$TaskToJson(_Task instance) => <String, dynamic>{
 };
 
 const _$PriorityEnumMap = {
+  Priority.none: 'none',
   Priority.low: 'low',
   Priority.medium: 'medium',
   Priority.high: 'high',

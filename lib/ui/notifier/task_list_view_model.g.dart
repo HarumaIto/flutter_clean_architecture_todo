@@ -41,7 +41,7 @@ final class TaskListViewModelProvider
   }
 }
 
-String _$taskListViewModelHash() => r'642a4315ea59f8e8bb9b281c38e07109d8b8b5c0';
+String _$taskListViewModelHash() => r'db124da9989c5c612bc467dc214dd9d4fc8eaac7';
 
 abstract class _$TaskListViewModel extends $Notifier<TaskListState> {
   TaskListState build();

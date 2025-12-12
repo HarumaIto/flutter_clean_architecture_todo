@@ -1,6 +1,8 @@
 import 'package:clean_architecture_todo/application/provider/task_usecase_providers.dart';
+import 'package:clean_architecture_todo/domain/service/vibration_service.dart';
 import 'package:clean_architecture_todo/domain/usecase/remove_task_usecase.dart';
 import 'package:clean_architecture_todo/domain/usecase/toggle_task_completion_usecase.dart';
+import 'package:clean_architecture_todo/infrastructure/provider/vibration_service_provider.dart';
 import 'package:clean_architecture_todo/ui/state/task_list_state.dart';
 import 'package:intl/intl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,6 +13,7 @@ part 'task_list_view_model.g.dart';
 class TaskListViewModel extends _$TaskListViewModel {
   late final IRemoveTaskUseCase _removeTaskUseCase;
   late final IToggleTaskCompletionUseCase _toggleTaskCompletionUseCase;
+  late final IVibrationService _vibrationService;
   late final DateFormat _dateFormat;
 
   @override
@@ -22,7 +25,10 @@ class TaskListViewModel extends _$TaskListViewModel {
 
   void _loadUseCases() {
     _removeTaskUseCase = ref.read(removeTaskUseCaseProvider);
-    _toggleTaskCompletionUseCase = ref.read(toggleTaskCompletionUseCaseProvider);
+    _toggleTaskCompletionUseCase = ref.read(
+      toggleTaskCompletionUseCaseProvider,
+    );
+    _vibrationService = ref.read(vibrationServiceProvider);
     _dateFormat = DateFormat('yyyy-MM-dd');
   }
 
@@ -51,5 +57,6 @@ class TaskListViewModel extends _$TaskListViewModel {
 
   Future<void> toggleCompletion(String taskId) async {
     await _toggleTaskCompletionUseCase.execute(taskId);
+    _vibrationService.vibrate();
   }
 }

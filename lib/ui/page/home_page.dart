@@ -1,4 +1,4 @@
-import 'package:clean_architecture_todo/ui/page/add_task_page.dart';
+import 'package:clean_architecture_todo/ui/navigator/navigator.dart';
 import 'package:clean_architecture_todo/ui/page/settings_page.dart';
 import 'package:clean_architecture_todo/ui/page/task_list_page.dart';
 import 'package:clean_architecture_todo/ui/notifier/view_model/home_view_model.dart';
@@ -10,7 +10,6 @@ class HomePage extends ConsumerWidget {
 
   static const _pages = <Widget>[
     TaskListPage(),
-    AddTaskPage(),
     SettingsPage(),
   ];
 
@@ -33,14 +32,16 @@ class HomePage extends ConsumerWidget {
             label: 'Tasks',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.read(navigatorProvider).pushToAddPage();
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
